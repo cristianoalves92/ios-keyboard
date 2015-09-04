@@ -14,6 +14,7 @@
 		8CA552E01B999D6300DCA97A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CA552DF1B999D6300DCA97A /* Images.xcassets */; };
 		8CA552E31B999D6300DCA97A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA552E11B999D6300DCA97A /* LaunchScreen.xib */; };
 		8CA552EF1B999D6300DCA97A /* Keyboard_TestsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA552EE1B999D6300DCA97A /* Keyboard_TestsTests.m */; };
+		8CA552FA1B99B96200DCA97A /* ScrollTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA552F91B99B96200DCA97A /* ScrollTestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		8CA552E81B999D6300DCA97A /* Keyboard TestsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Keyboard TestsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA552ED1B999D6300DCA97A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CA552EE1B999D6300DCA97A /* Keyboard_TestsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Keyboard_TestsTests.m; sourceTree = "<group>"; };
+		8CA552F81B99B96200DCA97A /* ScrollTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollTestViewController.h; sourceTree = "<group>"; };
+		8CA552F91B99B96200DCA97A /* ScrollTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollTestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,8 @@
 				8CA552DF1B999D6300DCA97A /* Images.xcassets */,
 				8CA552E11B999D6300DCA97A /* LaunchScreen.xib */,
 				8CA552D21B999D6200DCA97A /* Supporting Files */,
+				8CA552F81B99B96200DCA97A /* ScrollTestViewController.h */,
+				8CA552F91B99B96200DCA97A /* ScrollTestViewController.m */,
 			);
 			path = "Keyboard Tests";
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 				8CA552DB1B999D6200DCA97A /* ViewController.m in Sources */,
 				8CA552D81B999D6200DCA97A /* AppDelegate.m in Sources */,
 				8CA552D51B999D6200DCA97A /* main.m in Sources */,
+				8CA552FA1B99B96200DCA97A /* ScrollTestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

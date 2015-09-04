@@ -1,35 +1,37 @@
 //
-//  ViewController.m
+//  ScrollTestViewController.m
 //  Keyboard Tests
 //
 //  Created by Cristiano Alves on 04/09/15.
 //  Copyright (c) 2015 Cristiano Alves. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ScrollTestViewController.h"
 
-@interface ViewController ()
+@interface ScrollTestViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextView *textView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonVerticalSpaceConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewBottomContraint;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (strong, nonatomic) UITextField *activeTextField;
+
 @end
 
-@implementation ViewController
+@implementation ScrollTestViewController
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     [self observeKeyboard];
 }
 
 - (void)didReceiveMemoryWarning {
-    
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - observe keyboard
+#pragma mark - observe Keyboard
 
 - (void)observeKeyboard {
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -38,8 +40,8 @@
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     
-    NSDictionary *info = [notification userInfo];
     
+    NSDictionary *info = [notification userInfo];
     NSValue *keyboardFrameValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     NSValue *keyboardBegin = [info objectForKey:UIKeyboardFrameBeginUserInfoKey];
     NSValue *keyboardFinish= [info objectForKey:UIKeyboardFrameEndUserInfoKey];
@@ -53,19 +55,26 @@
         CGSize keyboardSize = keyboardFrame.size;
         
         NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-
-        self.buttonVerticalSpaceConstraint.constant += keyboardSize.height;
+        
+        self.scrollViewBottomContraint.constant += keyboardSize.height;
         
         [UIView animateWithDuration:animationDuration animations:^{
-            
             [self.view layoutIfNeeded];
+            CGPoint scrollPoint = self.scrollView.contentOffset;
+            
+            scrollPoint.y = self.activeTextField.frame.origin.y - self.scrollView.frame.size.height + self.activeTextField.frame.size.height + 8;
+            
+            if(scrollPoint.y > 0) {
+                
+                [self.scrollView setContentOffset:scrollPoint animated:NO];
+                
+            }
         }];
-        
     }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-
+    
     NSDictionary *info = [notification userInfo];
     NSValue *keyboardFrameValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     
@@ -74,7 +83,7 @@
     
     NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
-    self.buttonVerticalSpaceConstraint.constant -= keyboardSize.height;
+    self.scrollViewBottomContraint.constant -= keyboardSize.height;
     
     [UIView animateWithDuration:animationDuration animations:^{
         
@@ -83,11 +92,24 @@
     
 }
 
-#pragma mark - button action
+#pragma mark - textField delegate methods
 
-- (IBAction)hideKeyboardButtonAction:(id)sender {
+- (void) textFieldDidBeginEditing:(UITextField *)textField {
     
-    [self.textView endEditing:YES];
+    self.activeTextField = textField;
 }
+
+- (void) textFieldDidEndEditing:(UITextField *)textField {
+    
+    self.activeTextField = nil;
+}
+
+- (bool) textFieldShouldReturn:(UITextField *)textField {
+    
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
 
 @end
